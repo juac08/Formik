@@ -2,6 +2,7 @@
 
 import React from "react";
 import { useFormik } from "formik";
+import {db} from '../firebase'
 const Lecture1 = () => {
   const formik = useFormik({
     initialValues: {
@@ -10,7 +11,9 @@ const Lecture1 = () => {
       channel: "",
     },
     onSubmit: values => {
-        console.log(values)
+      db.collection('Lecture-1').add({
+        values,
+      })
     }
   });
   return (

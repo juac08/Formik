@@ -3,6 +3,7 @@
 import React from "react";
 import { useFormik } from "formik";
 import * as Yup from 'yup';
+import {db} from '../firebase'
 const initialValues = {
     name: "",
     email: "",
@@ -10,7 +11,9 @@ const initialValues = {
   }
   const onSubmit = 
   values => {
-    console.log(values)
+    db.collection('Lecture-3').add({
+      values,
+    })
 }
 
 const validationSchema =Yup.object({

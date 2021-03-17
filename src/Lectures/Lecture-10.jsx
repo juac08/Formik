@@ -1,8 +1,9 @@
-// Manually Trigger Validation. Put the whole form with formik function
+// Manually Trigger Validation. Put the whole form with formik function.Reset form data
 import React from "react";
 import { Formik, Form, Field, ErrorMessage, FieldArray, FastField } from "formik";
 import * as Yup from "yup";
 import TextError from "./texterror";
+import {db} from '../firebase'
 const initialValues = {
   name: "",
   email: "",
@@ -16,9 +17,15 @@ const initialValues = {
   phoneNumbers: ["", ""],
   phNumbers: [""],
 };
-const onSubmit = (values) => {
-  console.log(values);
-};
+const onSubmit = (values,onSubmitProps) => {
+onSubmitProps.resetForm();
+db.collection('Lecture-10').add({
+  values,
+})}
+// .then(()=>{
+//   alert('Submitted')
+// }).catch(error=>console.log(error))
+// };
 const validationSchema = Yup.object({
   name: Yup.string().required("Required"),
   email: Yup.string().email("Invalid email formate !").required("Required"),
@@ -149,7 +156,8 @@ const Lecture10 = () => {
                 <div>
                   {phNumbers.map((phNumber, index) => (
                     <div key={index}>
-                      <Field type="text" name={`phNumbers[${index}]`} />
+                      <Field type="text" name={`phNumbers[${index}]`} 
+                       placeholder='click + to add more' />
                       {index > 0 && (
                         <button
                           className="btn"

@@ -4,6 +4,7 @@ import React from "react";
 import { Formik, Form, Field, ErrorMessage, FieldArray, FastField } from "formik";
 import * as Yup from "yup";
 import TextError from "./texterror";
+import {db} from '../firebase'
 const initialValues = {
   name: "",
   email: "",
@@ -18,7 +19,9 @@ const initialValues = {
   phNumbers: [""],
 };
 const onSubmit = (values) => {
-  console.log(values);
+  db.collection('Lecture-9').add({
+    values,
+  })
 };
 const validationSchema = Yup.object({
   name: Yup.string().required("Required"),
@@ -28,6 +31,7 @@ const validationSchema = Yup.object({
 });
 const Lecture9 = () => {
   return (
+    <div className="App">
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
@@ -175,6 +179,7 @@ const Lecture9 = () => {
         </button>
       </Form>
     </Formik>
+    </div>
   );
 };
 export default Lecture9;

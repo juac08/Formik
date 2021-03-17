@@ -3,6 +3,7 @@ import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import TextError from "./texterror";
+import {db} from '../firebase'
 const initialValues = {
   name: "",
   email: "",
@@ -15,7 +16,9 @@ const initialValues = {
   },
 };
 const onSubmit = (values) => {
-  console.log(values);
+  db.collection('Lecture-5').add({
+    values,
+  })
 };
 const validationSchema = Yup.object({
   name: Yup.string().required("Required"),

@@ -1,6 +1,7 @@
 // Form Validation {All the field is Manadatory with valid Email}
 import React from "react";
 import { useFormik } from "formik";
+import {db} from '../firebase'
 const initialValues = {
     name: "",
     email: "",
@@ -8,7 +9,9 @@ const initialValues = {
   }
   const onSubmit = 
   values => {
-    console.log(values)
+    db.collection('Lecture-2').add({
+      values,
+    })
 }
 const validate = values => {
     const errors = {}
